@@ -1,0 +1,28 @@
+name: Microclimate Controller Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Linter
+        run: pylint microclimate_controller.py
+
+      - name: Run Tests
+        run: pytest test_microclimate.py -v
