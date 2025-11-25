@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Linter
-        run: pylint microclimate_controller.py --exit-zero
+        run: pylint microclimate_controller.py --disable=W0603,C0303
 
       - name: Run Tests
         run: pytest test_microclimate.py -v
