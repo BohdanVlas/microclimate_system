@@ -1,1 +1,2 @@
-# microclimate_controller
+# Microclimate Controller
+Проєкт для лабораторної роботи №5. Автоматизоване тестування контролю мікроклімату.
