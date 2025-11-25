@@ -1,5 +1,10 @@
 # microclimate_controller.py
 
+"""
+Модуль контролю мікроклімату.
+Зчитування сенсорних даних та керування виконавчими механізмами.
+"""
+
 sensor_data = {"temp": 25, "humidity": 50, "soil": 50}
 fan_state = False
 pump_state = False
@@ -9,7 +14,7 @@ TEMP_THRESHOLD = 30
 SOIL_THRESHOLD = 20
 
 def update_actuators():
-    
+    """Оновлює стани вентилятора, насосу і LED відповідно до сенсорних даних."""
     global fan_state, pump_state, led_color
     
     fan_state = sensor_data["temp"] > TEMP_THRESHOLD
