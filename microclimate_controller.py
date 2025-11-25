@@ -5,18 +5,17 @@
 Зчитування сенсорних даних та керування виконавчими механізмами.
 """
 
-sensor_data = {"temp": 25, "humidity": 50, "soil": 50}
-fan_state = False
-pump_state = False
-led_color = "green"
+class MicroclimateController:
+    def __init__(self):
+        self.sensor_data = {"temp": 25, "humidity": 50, "soil": 50}
+        self.fan_state = False
+        self.pump_state = False
+        self.led_color = "green"
+        self.TEMP_THRESHOLD = 30
+        self.SOIL_THRESHOLD = 20
 
-TEMP_THRESHOLD = 30
-SOIL_THRESHOLD = 20
-
-def update_actuators():
-    """Оновлює стани вентилятора, насосу і LED відповідно до сенсорних даних."""
-    global fan_state, pump_state, led_color
-    
-    fan_state = sensor_data["temp"] > TEMP_THRESHOLD
-    pump_state = sensor_data["soil"] < SOIL_THRESHOLD
-    led_color = "red" if fan_state or pump_state else "green"
+    def update_actuators(self):
+        """Оновлює стани вентилятора, насосу і LED відповідно до сенсорних даних."""
+        self.fan_state = self.sensor_data["temp"] > self.TEMP_THRESHOLD
+        self.pump_state = self.sensor_data["soil"] < self.SOIL_THRESHOLD
+        self.led_color = "red" if self.fan_state or self.pump_state else "green"
