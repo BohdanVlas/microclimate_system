@@ -9,7 +9,9 @@ TEMP_THRESHOLD = 30
 SOIL_THRESHOLD = 20
 
 def update_actuators():
+    
     global fan_state, pump_state, led_color
+    
     if sensor_data["temp"] > TEMP_THRESHOLD:
         fan_state = True
     else:
