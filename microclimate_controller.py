@@ -12,15 +12,6 @@ def update_actuators():
     
     global fan_state, pump_state, led_color
     
-    if sensor_data["temp"] > TEMP_THRESHOLD:
-        fan_state = True
-    else:
-        fan_state = False
-    if sensor_data["soil"] < SOIL_THRESHOLD:
-        pump_state = True
-    else:
-        pump_state = False
-    if fan_state or pump_state:
-        led_color = "red"
-    else:
-        led_color = "green"
+    fan_state = sensor_data["temp"] > TEMP_THRESHOLD
+    pump_state = sensor_data["soil"] < SOIL_THRESHOLD
+    led_color = "red" if fan_state or pump_state else "green"
