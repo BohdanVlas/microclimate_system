@@ -1,2 +1,5 @@
 pytest
 pylint
+prometheus-client
+flask
+requests
