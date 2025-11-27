@@ -9,6 +9,8 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKER_REGISTRY }}/microclimate_system:${{ github.sha }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -30,13 +32,10 @@ jobs:
           fi
 
       - name: Run unit tests
-        run: |
-          pytest -q --maxfail=1
+        run: pytest -q --maxfail=1
         continue-on-error: false
 
       - name: Build Docker image
-        env:
-          IMAGE_NAME: ${{ secrets.DOCKER_REGISTRY }}/microclimate_system:${{ github.sha }}
         run: |
           docker build -t $IMAGE_NAME .
           echo "Built $IMAGE_NAME"
@@ -51,8 +50,7 @@ jobs:
 
       - name: Push Docker image
         if: always()
-        run: |
-          docker push $IMAGE_NAME
+        run: docker push $IMAGE_NAME
 
   deploy:
     needs: build-test
