@@ -1,0 +1,21 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t my-app .
+
+    - name: Run container
+      run: docker run -d -p 3000:3000 my-app
